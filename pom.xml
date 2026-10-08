@@ -6,14 +6,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>MantenimientoFlotaLogin-1.0-SNAPSHOT</name>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-    
+
     <dependencies>
         <!-- API de Jakarta EE 10 para Servlets y JSP -->
         <dependency>
@@ -23,14 +23,21 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Conector JDBC para PostgreSQL -->
+        <!-- Conector JDBC para SQL Server -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.3</version>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.8.1.jre11</version>
+        </dependency>
+
+        <!-- Encriptación de contraseñas (BCrypt) -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
