@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controlador;
 
 import java.io.IOException;
@@ -16,10 +12,11 @@ import modelo.UsuarioDao;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
+        request.setCharacterEncoding("UTF-8");
+
         String usuario = request.getParameter("txtUsuario");
         String password = request.getParameter("txtPassword");
 
@@ -28,52 +25,50 @@ public class LoginServlet extends HttpServlet {
 
         switch (resultado) {
             case "EXITO":
-                HttpSession session = request.getSession();
+                // Se descarta cualquier sesión anterior y se crea una nueva
+                HttpSession anterior = request.getSession(false);
+                if (anterior != null) {
+                    anterior.invalidate();
+                }
+                HttpSession session = request.getSession(true);
                 session.setAttribute("usuarioLogueado", usuario);
                 response.sendRedirect("dashboard.jsp");
                 break;
-                
+
             case "BLOQUEADO":
-                request.setAttribute("error", "Acceso denegado: Su cuenta se encuentra BLOQUEADA por exceder los 3 intentos fallidos.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                break;
-                
             case "MAX_INTENTOS":
-                request.setAttribute("error", "Contraseña incorrecta. Ha alcanzado el límite de 3 intentos y su cuenta ha sido BLOQUEADA.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                // Cuenta bloqueada: página que intenta cerrar la ventana
+                request.getRequestDispatcher("bloqueado.jsp").forward(request, response);
                 break;
-                
+
             case "ERROR_PASS":
-                request.setAttribute("error", "Contraseña incorrecta. Verifique sus datos.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                break;
-                
             case "NO_EXISTE":
-                request.setAttribute("error", "El usuario ingresado no existe en el sistema.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                mostrarError(request, response,
+                        "Usuario o contraseña incorrectos. Verifique sus datos.");
                 break;
-                
+
             case "ERROR_BD":
-                request.setAttribute("error", "Error de conexión con PostgreSQL. Revisa la contraseña en ConexionBD.java");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                mostrarError(request, response,
+                        "No se pudo conectar con el sistema. Intente nuevamente en unos minutos.");
                 break;
-                
+
             default:
-                request.setAttribute("error", "Ocurrió un error inesperado en el servidor.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                mostrarError(request, response,
+                        "Ocurrió un error inesperado en el servidor.");
                 break;
         }
     }
 
+    // El login solo se procesa por POST; si alguien abre la dirección directamente, vuelve al formulario
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("login.jsp");
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    private void mostrarError(HttpServletRequest request, HttpServletResponse response, String mensaje)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setAttribute("error", mensaje);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 }
