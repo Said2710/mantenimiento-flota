@@ -31,8 +31,11 @@ public class UsuarioDao {
                 return "NO_EXISTE";
             }
 
-            if (datos.bloqueado() || !"Activo".equals(datos.estado())) {
+            if (datos.bloqueado()) {
                 return "BLOQUEADO";
+            }
+            if (!"Activo".equals(datos.estado())) {
+                return "INACTIVO";
             }
 
             if (passwordCorrecta(password, datos.hash())) {

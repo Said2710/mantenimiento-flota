@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuarioLogueado", usuario);
-                response.sendRedirect("dashboard.jsp");
+               response.sendRedirect("UsuarioServlet");
                 break;
 
             case "BLOQUEADO":
@@ -46,7 +46,10 @@ public class LoginServlet extends HttpServlet {
                 mostrarError(request, response,
                         "Usuario o contraseña incorrectos. Verifique sus datos.");
                 break;
-
+            case "INACTIVO":
+                mostrarError(request, response,
+                        "Su cuenta está inactiva. Contacte al administrador.");
+                break;
             case "ERROR_BD":
                 mostrarError(request, response,
                         "No se pudo conectar con el sistema. Intente nuevamente en unos minutos.");
