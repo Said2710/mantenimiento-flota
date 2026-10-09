@@ -14,12 +14,8 @@ import org.mindrot.jbcrypt.BCrypt;
  * Operaciones CRUD sobre la tabla Usuarios (SQL Server).
  * Usa la conexión única del Singleton ConexionBD, que no se cierra aquí.
  */
-public class UsuarioCrudDao {
+public class UsuarioRepositoryJdbc implements UsuarioRepository {
 
-    public static final String OK = "OK";
-    public static final String DUPLICADO = "DUPLICADO";
-    public static final String NO_ENCONTRADO = "NO_ENCONTRADO";
-    public static final String ERROR_BD = "ERROR_BD";
 
     private static final String SELECT_BASE =
             "SELECT u.idUsuario, u.nombreUsuario, u.rol_id, r.nombre_rol, u.estado, "
@@ -27,6 +23,7 @@ public class UsuarioCrudDao {
           + "FROM Usuarios u INNER JOIN rol r ON r.rol_id = u.rol_id ";
 
     /** Lista todos los usuarios. Devuelve null si hubo un error de base de datos. */
+    @Override
     public List<Usuario> listar() {
         Connection conn = ConexionBD.getInstancia().getConexion();
         if (conn == null) {
@@ -46,6 +43,7 @@ public class UsuarioCrudDao {
     }
 
     /** Busca un usuario por su id. Devuelve null si no existe o hay un error. */
+    @Override
     public Usuario buscarPorId(int idUsuario) {
         Connection conn = ConexionBD.getInstancia().getConexion();
         if (conn == null) {
@@ -63,6 +61,7 @@ public class UsuarioCrudDao {
     }
 
     /** Busca un usuario por su nombre de usuario. Devuelve null si no existe o hay un error. */
+    @Override
     public Usuario buscarPorNombre(String nombreUsuario) {
         Connection conn = ConexionBD.getInstancia().getConexion();
         if (conn == null) {
@@ -80,6 +79,7 @@ public class UsuarioCrudDao {
     }
 
     /** Crea un usuario con la contraseña encriptada (BCrypt). */
+    @Override
     public String crear(String nombreUsuario, String contrasena, int rolId,
                         String estado, String registradoPor) {
         Connection conn = ConexionBD.getInstancia().getConexion();
@@ -104,6 +104,7 @@ public class UsuarioCrudDao {
     /**
      * Actualiza nombre, rol y estado. La contraseña solo se cambia si se envía una nueva.
      */
+    @Override
     public String editar(int idUsuario, String nombreUsuario, String contrasenaNueva,
                          int rolId, String estado) {
         Connection conn = ConexionBD.getInstancia().getConexion();
@@ -131,11 +132,13 @@ public class UsuarioCrudDao {
     }
 
     /** Elimina un usuario. */
+    @Override
     public String eliminar(int idUsuario) {
         return ejecutar("DELETE FROM Usuarios WHERE idUsuario = ?", idUsuario);
     }
 
     /** Quita el bloqueo y reinicia los intentos fallidos. */
+    @Override
     public String desbloquear(int idUsuario) {
         return ejecutar("UPDATE Usuarios SET bloqueado = 0, intentosFallidos = 0, "
                       + "fechaActualizacion = GETDATE() WHERE idUsuario = ?", idUsuario);

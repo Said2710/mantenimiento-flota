@@ -11,7 +11,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import modelo.Usuario;
-import modelo.UsuarioCrudDao;
+import modelo.UsuarioRepository;
+import modelo.UsuarioRepositoryJdbc;
+
+
 
 /**
  * Controlador del CRUD de usuarios.
@@ -23,7 +26,7 @@ public class UsuarioServlet extends HttpServlet {
 
     private static final Pattern NOMBRE_VALIDO = Pattern.compile("^[A-Za-z0-9._-]{3,50}$");
 
-    private final UsuarioCrudDao dao = new UsuarioCrudDao();
+        private final UsuarioRepository dao = new UsuarioRepositoryJdbc();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -121,9 +124,9 @@ public class UsuarioServlet extends HttpServlet {
         }
 
         String resultado = dao.crear(nombre, contrasena, rolId, estado, yo.getNombreUsuario());
-        if (UsuarioCrudDao.OK.equals(resultado)) {
+        if (UsuarioRepositoryJdbc.OK.equals(resultado)) {
             mensaje(session, "success", "Usuario \"" + nombre + "\" creado correctamente.");
-        } else if (UsuarioCrudDao.DUPLICADO.equals(resultado)) {
+        } else if (UsuarioRepositoryJdbc.DUPLICADO.equals(resultado)) {
             mensaje(session, "danger", "El nombre de usuario \"" + nombre + "\" ya existe.");
         } else {
             mensaje(session, "danger", "No se pudo crear el usuario. Verifique el rol e intente nuevamente.");
@@ -160,13 +163,13 @@ public class UsuarioServlet extends HttpServlet {
         }
 
         String resultado = dao.editar(id, nombre, contrasena, rolId, estado);
-        if (UsuarioCrudDao.OK.equals(resultado)) {
+        if (UsuarioRepositoryJdbc.OK.equals(resultado)) {
             if (esYo) {
                 // Si el administrador cambió su propio nombre, se actualiza la sesión
                 session.setAttribute("usuarioLogueado", nombre);
             }
             mensaje(session, "success", "Usuario \"" + nombre + "\" actualizado correctamente.");
-        } else if (UsuarioCrudDao.DUPLICADO.equals(resultado)) {
+        } else if (UsuarioRepositoryJdbc.DUPLICADO.equals(resultado)) {
             mensaje(session, "danger", "El nombre de usuario \"" + nombre + "\" ya existe.");
         } else {
             mensaje(session, "danger", "No se pudo actualizar el usuario. Intente nuevamente.");
@@ -184,7 +187,7 @@ public class UsuarioServlet extends HttpServlet {
             mensaje(session, "danger", "No puede eliminar su propia cuenta.");
             return;
         }
-        if (UsuarioCrudDao.OK.equals(dao.eliminar(id))) {
+        if (UsuarioRepositoryJdbc.OK.equals(dao.eliminar(id))) {
             mensaje(session, "success", "Usuario \"" + destino.getNombreUsuario() + "\" eliminado.");
         } else {
             mensaje(session, "danger", "No se pudo eliminar el usuario. Intente nuevamente.");
@@ -193,7 +196,7 @@ public class UsuarioServlet extends HttpServlet {
 
     private void desbloquear(HttpServletRequest request, HttpSession session) {
         Integer id = entero(request.getParameter("idUsuario"));
-        if (id != null && UsuarioCrudDao.OK.equals(dao.desbloquear(id))) {
+        if (id != null && UsuarioRepositoryJdbc.OK.equals(dao.desbloquear(id))) {
             mensaje(session, "success", "Cuenta desbloqueada correctamente.");
         } else {
             mensaje(session, "danger", "No se pudo desbloquear la cuenta.");
