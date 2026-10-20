@@ -155,11 +155,35 @@
         <a href="UsuarioServlet" class="nav-item-custom active">
           <i class="bi bi-people-fill fs-5 me-3 text-warning"></i><span>Usuarios</span>
         </a>
-        <a href="#" class="nav-item-custom disabled" tabindex="-1" aria-disabled="true">
-          <i class="bi bi-truck-front fs-5 me-3"></i><span class="flex-grow-1">Vehículos</span><span class="badge badge-soon">Pronto</span>
+        <a href="ClienteServlet" class="nav-item-custom">
+          <i class="bi bi-person-vcard fs-5 me-3"></i><span>Clientes</span>
         </a>
-        <a href="#" class="nav-item-custom disabled" tabindex="-1" aria-disabled="true">
-          <i class="bi bi-tools fs-5 me-3"></i><span class="flex-grow-1">Mantenimiento</span><span class="badge badge-soon">Pronto</span>
+        <a href="ProveedorServlet" class="nav-item-custom">
+          <i class="bi bi-building fs-5 me-3"></i><span>Proveedores</span>
+        </a>
+        <a href="RepuestoServlet" class="nav-item-custom">
+          <i class="bi bi-box-seam fs-5 me-3"></i><span>Repuestos</span>
+        </a>
+        <a href="VehiculoServlet" class="nav-item-custom">
+          <i class="bi bi-truck-front fs-5 me-3"></i><span>Vehículos</span>
+        </a>
+        <a href="ComponenteServlet" class="nav-item-custom">
+          <i class="bi bi-gear-wide-connected fs-5 me-3"></i><span>Componentes</span>
+        </a>
+        <a href="ReglaMantenimientoServlet" class="nav-item-custom">
+          <i class="bi bi-tools fs-5 me-3"></i><span>Reglas de mantenimiento</span>
+        </a>
+        <a href="RegistroOperacionServlet" class="nav-item-custom">
+          <i class="bi bi-speedometer2 fs-5 me-3"></i><span>Lecturas de operación</span>
+        </a>
+        <a href="EvaluacionMantenimientoServlet" class="nav-item-custom">
+          <i class="bi bi-clipboard2-pulse fs-5 me-3"></i><span>Evaluación preventiva</span>
+        </a>
+        <a href="SolicitudServicioServlet" class="nav-item-custom">
+          <i class="bi bi-file-earmark-plus fs-5 me-3"></i><span>Solicitudes de servicio</span>
+        </a>
+        <a href="VentaServicioServlet" class="nav-item-custom">
+          <i class="bi bi-receipt fs-5 me-3"></i><span>Ventas de servicio</span>
         </a>
         <a href="#" class="nav-item-custom disabled" tabindex="-1" aria-disabled="true">
           <i class="bi bi-bar-chart-line fs-5 me-3"></i><span class="flex-grow-1">Reportes</span><span class="badge badge-soon">Pronto</span>
@@ -181,11 +205,35 @@
         <a href="UsuarioServlet" class="nav-item-custom active">
           <i class="bi bi-people-fill fs-5 me-3 text-warning"></i><span>Usuarios</span>
         </a>
-        <a href="#" class="nav-item-custom disabled">
-          <i class="bi bi-truck-front fs-5 me-3"></i><span class="flex-grow-1">Vehículos</span><span class="badge badge-soon">Pronto</span>
+        <a href="ClienteServlet" class="nav-item-custom">
+          <i class="bi bi-person-vcard fs-5 me-3"></i><span>Clientes</span>
         </a>
-        <a href="#" class="nav-item-custom disabled">
-          <i class="bi bi-tools fs-5 me-3"></i><span class="flex-grow-1">Mantenimiento</span><span class="badge badge-soon">Pronto</span>
+        <a href="ProveedorServlet" class="nav-item-custom">
+          <i class="bi bi-building fs-5 me-3"></i><span>Proveedores</span>
+        </a>
+        <a href="RepuestoServlet" class="nav-item-custom">
+          <i class="bi bi-box-seam fs-5 me-3"></i><span>Repuestos</span>
+        </a>
+        <a href="VehiculoServlet" class="nav-item-custom">
+          <i class="bi bi-truck-front fs-5 me-3"></i><span>Vehículos</span>
+        </a>
+        <a href="ComponenteServlet" class="nav-item-custom">
+          <i class="bi bi-gear-wide-connected fs-5 me-3"></i><span>Componentes</span>
+        </a>
+        <a href="ReglaMantenimientoServlet" class="nav-item-custom">
+          <i class="bi bi-tools fs-5 me-3"></i><span>Reglas de mantenimiento</span>
+        </a>
+        <a href="RegistroOperacionServlet" class="nav-item-custom">
+          <i class="bi bi-speedometer2 fs-5 me-3"></i><span>Lecturas de operación</span>
+        </a>
+        <a href="EvaluacionMantenimientoServlet" class="nav-item-custom">
+          <i class="bi bi-clipboard2-pulse fs-5 me-3"></i><span>Evaluación preventiva</span>
+        </a>
+        <a href="SolicitudServicioServlet" class="nav-item-custom">
+          <i class="bi bi-file-earmark-plus fs-5 me-3"></i><span>Solicitudes de servicio</span>
+        </a>
+        <a href="VentaServicioServlet" class="nav-item-custom">
+          <i class="bi bi-receipt fs-5 me-3"></i><span>Ventas de servicio</span>
         </a>
         <a href="#" class="nav-item-custom disabled">
           <i class="bi bi-bar-chart-line fs-5 me-3"></i><span class="flex-grow-1">Reportes</span><span class="badge badge-soon">Pronto</span>

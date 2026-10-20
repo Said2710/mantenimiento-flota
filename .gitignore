@@ -1,2 +1,8 @@
 target/
 nb-configuration.xml
+*.zip
+*.war
+/.codex-build-week10/
+/entrega-*/
+/outputs/*.zip
+/outputs/*.war

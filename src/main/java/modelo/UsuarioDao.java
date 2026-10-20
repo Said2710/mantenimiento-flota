@@ -11,26 +11,15 @@ public class UsuarioDao {
 
     private static final int MAX_INTENTOS = 3;
 
-    /** Datos del usuario que se necesitan para validar el login. */
     private record DatosLogin(int intentos, boolean bloqueado, String estado, String hash) { }
 
-    /**
-     * Valida el acceso del usuario y controla el bloqueo por 3 intentos fallidos.
-     * @return "EXITO", "BLOQUEADO", "MAX_INTENTOS", "ERROR_PASS", "NO_EXISTE" o "ERROR_BD"
-     */
+    /** Valida el acceso y actualiza el contador de intentos fallidos. */
     public String validarLogin(String username, String password) {
-        // Conexión única del Singleton: se reutiliza y NO se cierra aquí
-        Connection conn = ConexionBD.getInstancia().getConexion();
-        if (conn == null) {
-            return "ERROR_BD";
-        }
-
-        try {
+        try (Connection conn = ConexionBD.getInstancia().getConexion()) {
             DatosLogin datos = buscarUsuario(conn, username);
             if (datos == null) {
                 return "NO_EXISTE";
             }
-
             if (datos.bloqueado()) {
                 return "BLOQUEADO";
             }
@@ -50,7 +39,6 @@ public class UsuarioDao {
             }
             actualizarIntentos(conn, username, intentos);
             return "ERROR_PASS";
-
         } catch (SQLException e) {
             System.err.println("Error en la validación del login: " + e.getMessage());
             return "ERROR_BD";
@@ -59,10 +47,10 @@ public class UsuarioDao {
 
     private DatosLogin buscarUsuario(Connection conn, String username) throws SQLException {
         String sql = "SELECT intentosFallidos, bloqueado, estado, contrasena "
-                   + "FROM Usuarios WHERE nombreUsuario = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            try (ResultSet rs = pstmt.executeQuery()) {
+                   + "FROM dbo.Usuarios WHERE nombreUsuario = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
                     return null;
                 }
@@ -75,7 +63,6 @@ public class UsuarioDao {
         }
     }
 
-    /** Compara la contraseña escrita con el hash BCrypt guardado. */
     private boolean passwordCorrecta(String password, String hash) {
         if (password == null || hash == null) {
             return false;
@@ -83,42 +70,40 @@ public class UsuarioDao {
         try {
             return BCrypt.checkpw(password, hash);
         } catch (IllegalArgumentException e) {
-            return false; // el valor guardado no es un hash BCrypt válido
+            return false;
         }
     }
 
-    private void registrarAcceso(Connection conn, String username) {
+    private void registrarAcceso(Connection conn, String username) throws SQLException {
         ejecutarUpdate(conn,
-            "UPDATE Usuarios SET intentosFallidos = 0, bloqueado = 0, "
-          + "ultimoAcceso = GETDATE(), fechaActualizacion = GETDATE() WHERE nombreUsuario = ?",
-            username, null);
+                "UPDATE dbo.Usuarios SET intentosFallidos = 0, bloqueado = 0, "
+                + "ultimoAcceso = GETDATE(), fechaActualizacion = GETDATE() "
+                + "WHERE nombreUsuario = ?", username, null);
     }
 
-    private void bloquearUsuario(Connection conn, String username) {
+    private void bloquearUsuario(Connection conn, String username) throws SQLException {
         ejecutarUpdate(conn,
-            "UPDATE Usuarios SET intentosFallidos = 3, bloqueado = 1, "
-          + "fechaActualizacion = GETDATE() WHERE nombreUsuario = ?",
-            username, null);
+                "UPDATE dbo.Usuarios SET intentosFallidos = ?, bloqueado = 1, "
+                + "fechaActualizacion = GETDATE() WHERE nombreUsuario = ?",
+                username, MAX_INTENTOS);
     }
 
-    private void actualizarIntentos(Connection conn, String username, int intentos) {
+    private void actualizarIntentos(Connection conn, String username, int intentos)
+            throws SQLException {
         ejecutarUpdate(conn,
-            "UPDATE Usuarios SET intentosFallidos = ?, fechaActualizacion = GETDATE() "
-          + "WHERE nombreUsuario = ?",
-            username, intentos);
+                "UPDATE dbo.Usuarios SET intentosFallidos = ?, fechaActualizacion = GETDATE() "
+                + "WHERE nombreUsuario = ?", username, intentos);
     }
 
-    /** Ejecuta un UPDATE; si "intentos" no es null, se usa como primer parámetro. */
-    private void ejecutarUpdate(Connection conn, String sql, String username, Integer intentos) {
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            int i = 1;
+    private void ejecutarUpdate(Connection conn, String sql, String username, Integer intentos)
+            throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            int indice = 1;
             if (intentos != null) {
-                pstmt.setInt(i++, intentos);
+                ps.setInt(indice++, intentos);
             }
-            pstmt.setString(i, username);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ps.setString(indice, username);
+            ps.executeUpdate();
         }
     }
 }
