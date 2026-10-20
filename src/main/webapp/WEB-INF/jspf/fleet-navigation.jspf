@@ -2,8 +2,8 @@
     String fleetNavPath = request.getRequestURI();
 %>
 <button class="fleet-menu-toggle" id="fleetMenuToggle" type="button" aria-controls="fleetSidebar" aria-expanded="false">
-    <span aria-hidden="true">☰</span>
-    <span>Menú</span>
+    <i class="bi bi-list" aria-hidden="true"></i>
+    <span>Men&uacute;</span>
 </button>
 <div class="fleet-menu-backdrop" id="fleetMenuBackdrop" aria-hidden="true"></div>
 <aside class="fleet-sidebar" id="fleetSidebar" aria-label="Navegación principal">
@@ -14,23 +14,23 @@
             <small class="text-white-50">Control &amp; Mantenimiento</small>
         </span>
     </a>
-    <nav class="fleet-sidebar-nav" aria-label="Módulos">
-        <div class="fleet-sidebar-label">Gestión de flota</div>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("UsuarioServlet") ? "active" : "" %>" href="UsuarioServlet"><span class="fleet-nav-code">US</span>Usuarios</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ClienteServlet") ? "active" : "" %>" href="ClienteServlet"><span class="fleet-nav-code">CL</span>Clientes</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ProveedorServlet") ? "active" : "" %>" href="ProveedorServlet"><span class="fleet-nav-code">PR</span>Proveedores</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RepuestoServlet") ? "active" : "" %>" href="RepuestoServlet"><span class="fleet-nav-code">RP</span>Repuestos</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VehiculoServlet") ? "active" : "" %>" href="VehiculoServlet"><span class="fleet-nav-code">VH</span>Vehículos</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ComponenteServlet") ? "active" : "" %>" href="ComponenteServlet"><span class="fleet-nav-code">CP</span>Componentes</a>
+    <nav class="fleet-sidebar-nav" aria-label="M&oacute;dulos">
+        <div class="fleet-sidebar-label">Gesti&oacute;n de flota</div>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("UsuarioServlet") ? "active" : "" %>" href="UsuarioServlet"><i class="bi bi-people-fill" aria-hidden="true"></i><span>Usuarios</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ClienteServlet") ? "active" : "" %>" href="ClienteServlet"><i class="bi bi-person-vcard" aria-hidden="true"></i><span>Clientes</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ProveedorServlet") ? "active" : "" %>" href="ProveedorServlet"><i class="bi bi-building" aria-hidden="true"></i><span>Proveedores</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RepuestoServlet") ? "active" : "" %>" href="RepuestoServlet"><i class="bi bi-box-seam" aria-hidden="true"></i><span>Repuestos</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VehiculoServlet") ? "active" : "" %>" href="VehiculoServlet"><i class="bi bi-truck-front" aria-hidden="true"></i><span>Veh&iacute;culos</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ComponenteServlet") ? "active" : "" %>" href="ComponenteServlet"><i class="bi bi-gear-wide-connected" aria-hidden="true"></i><span>Componentes</span></a>
         <div class="fleet-sidebar-label mt-2">Mantenimiento</div>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ReglaMantenimientoServlet") ? "active" : "" %>" href="ReglaMantenimientoServlet"><span class="fleet-nav-code">RM</span>Reglas de mantenimiento</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RegistroOperacionServlet") ? "active" : "" %>" href="RegistroOperacionServlet"><span class="fleet-nav-code">LO</span>Lecturas de operación</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("EvaluacionMantenimientoServlet") ? "active" : "" %>" href="EvaluacionMantenimientoServlet"><span class="fleet-nav-code">EP</span>Evaluación preventiva</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("SolicitudServicioServlet") ? "active" : "" %>" href="SolicitudServicioServlet"><span class="fleet-nav-code">SS</span>Solicitudes de servicio</a>
-        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VentaServicioServlet") ? "active" : "" %>" href="VentaServicioServlet"><span class="fleet-nav-code">VS</span>Ventas de servicio</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ReglaMantenimientoServlet") ? "active" : "" %>" href="ReglaMantenimientoServlet"><i class="bi bi-tools" aria-hidden="true"></i><span>Reglas de mantenimiento</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RegistroOperacionServlet") ? "active" : "" %>" href="RegistroOperacionServlet"><i class="bi bi-speedometer2" aria-hidden="true"></i><span>Lecturas de operaci&oacute;n</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("EvaluacionMantenimientoServlet") ? "active" : "" %>" href="EvaluacionMantenimientoServlet"><i class="bi bi-clipboard2-pulse" aria-hidden="true"></i><span>Evaluaci&oacute;n preventiva</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("SolicitudServicioServlet") ? "active" : "" %>" href="SolicitudServicioServlet"><i class="bi bi-file-earmark-plus" aria-hidden="true"></i><span>Solicitudes de servicio</span></a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VentaServicioServlet") ? "active" : "" %>" href="VentaServicioServlet"><i class="bi bi-receipt" aria-hidden="true"></i><span>Ventas de servicio</span></a>
     </nav>
     <div class="fleet-sidebar-footer">
-        <a class="fleet-logout-link" href="LogoutServlet"><span aria-hidden="true">↪</span>Cerrar sesión</a>
+        <a class="fleet-logout-link" href="LogoutServlet"><i class="bi bi-box-arrow-left" aria-hidden="true"></i><span>Cerrar sesi&oacute;n</span></a>
     </div>
 </aside>
 <script>

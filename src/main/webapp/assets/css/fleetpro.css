@@ -326,18 +326,16 @@ textarea.form-control {
   font-weight: 700;
 }
 
-.fleet-nav-code {
-  display: inline-flex;
-  width: 29px;
-  height: 29px;
-  flex: 0 0 29px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.17);
-  border-radius: 8px;
+.fleet-nav-link > .bi {
+  width: 24px;
+  flex: 0 0 24px;
   color: #dce9df;
-  font-size: 0.62rem;
-  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.fleet-nav-link.active > .bi {
+  color: #ffd18d;
 }
 
 .fleet-sidebar-footer {
@@ -361,6 +359,10 @@ textarea.form-control {
   text-decoration: none;
 }
 
+.fleet-logout-link > .bi {
+  font-size: 1.05rem;
+}
+
 .fleet-logout-link:hover {
   color: #fff;
   background: rgba(180, 35, 24, 0.25);
@@ -382,13 +384,7 @@ textarea.form-control {
 }
 
 .fleet-page-main > .d-flex:first-child {
-  min-height: 104px;
-  margin-bottom: 1.35rem !important;
-  padding: 1.15rem 1.4rem;
-  border: 1px solid #e1e9e2;
-  border-radius: 16px;
-  background: linear-gradient(115deg, #fff 0%, #eff5f0 100%);
-  box-shadow: 0 8px 22px rgba(31, 36, 33, 0.045);
+  margin-bottom: 1.25rem !important;
 }
 
 .fleet-page-main > .d-flex:first-child h1 {
@@ -396,33 +392,25 @@ textarea.form-control {
   font-size: clamp(1.45rem, 2vw, 1.85rem);
 }
 
-.fleet-page-main > .d-flex:first-child h1::before {
-  display: block;
-  width: 34px;
-  height: 4px;
-  margin-bottom: 0.55rem;
-  border-radius: 5px;
-  background: var(--fleet-amber);
-  content: "";
-}
-
 .fleet-page-main > .card {
   margin-bottom: 1.25rem;
 }
 
-.fleet-page-main > .card > .card-header h2 {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  color: var(--fleet-forest);
+.fleet-page-main .table-responsive {
+  overflow-x: auto;
 }
 
-.fleet-page-main > .card > .card-header h2::before {
-  width: 4px;
-  height: 1.15rem;
-  border-radius: 4px;
-  background: var(--fleet-amber);
-  content: "";
+.fleet-page-main .table {
+  min-width: 760px;
+}
+
+.fleet-page-main .table th,
+.fleet-page-main .table td {
+  white-space: nowrap;
+}
+
+.fleet-page-main > .card > .card-header h2 {
+  color: var(--fleet-forest);
 }
 
 @media (max-width: 991.98px) {
@@ -478,7 +466,6 @@ textarea.form-control {
     align-items: flex-start !important;
     gap: 0.8rem;
     flex-wrap: wrap;
-    padding: 1rem;
   }
 }
 
