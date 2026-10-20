@@ -1,0 +1,56 @@
+<%
+    String fleetNavPath = request.getRequestURI();
+%>
+<button class="fleet-menu-toggle" id="fleetMenuToggle" type="button" aria-controls="fleetSidebar" aria-expanded="false">
+    <span aria-hidden="true">☰</span>
+    <span>Menú</span>
+</button>
+<div class="fleet-menu-backdrop" id="fleetMenuBackdrop" aria-hidden="true"></div>
+<aside class="fleet-sidebar" id="fleetSidebar" aria-label="Navegación principal">
+    <a class="fleet-sidebar-brand" href="UsuarioServlet">
+        <img src="assets/img/fleetpro-mark.svg" alt="">
+        <span>
+            <strong class="d-block">FleetPro</strong>
+            <small class="text-white-50">Control &amp; Mantenimiento</small>
+        </span>
+    </a>
+    <nav class="fleet-sidebar-nav" aria-label="Módulos">
+        <div class="fleet-sidebar-label">Gestión de flota</div>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("UsuarioServlet") ? "active" : "" %>" href="UsuarioServlet"><span class="fleet-nav-code">US</span>Usuarios</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ClienteServlet") ? "active" : "" %>" href="ClienteServlet"><span class="fleet-nav-code">CL</span>Clientes</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ProveedorServlet") ? "active" : "" %>" href="ProveedorServlet"><span class="fleet-nav-code">PR</span>Proveedores</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RepuestoServlet") ? "active" : "" %>" href="RepuestoServlet"><span class="fleet-nav-code">RP</span>Repuestos</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VehiculoServlet") ? "active" : "" %>" href="VehiculoServlet"><span class="fleet-nav-code">VH</span>Vehículos</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ComponenteServlet") ? "active" : "" %>" href="ComponenteServlet"><span class="fleet-nav-code">CP</span>Componentes</a>
+        <div class="fleet-sidebar-label mt-2">Mantenimiento</div>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("ReglaMantenimientoServlet") ? "active" : "" %>" href="ReglaMantenimientoServlet"><span class="fleet-nav-code">RM</span>Reglas de mantenimiento</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("RegistroOperacionServlet") ? "active" : "" %>" href="RegistroOperacionServlet"><span class="fleet-nav-code">LO</span>Lecturas de operación</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("EvaluacionMantenimientoServlet") ? "active" : "" %>" href="EvaluacionMantenimientoServlet"><span class="fleet-nav-code">EP</span>Evaluación preventiva</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("SolicitudServicioServlet") ? "active" : "" %>" href="SolicitudServicioServlet"><span class="fleet-nav-code">SS</span>Solicitudes de servicio</a>
+        <a class="fleet-nav-link <%= fleetNavPath.endsWith("VentaServicioServlet") ? "active" : "" %>" href="VentaServicioServlet"><span class="fleet-nav-code">VS</span>Ventas de servicio</a>
+    </nav>
+    <div class="fleet-sidebar-footer">
+        <a class="fleet-logout-link" href="LogoutServlet"><span aria-hidden="true">↪</span>Cerrar sesión</a>
+    </div>
+</aside>
+<script>
+    (function () {
+        var toggle = document.getElementById('fleetMenuToggle');
+        var backdrop = document.getElementById('fleetMenuBackdrop');
+        var links = document.querySelectorAll('.fleet-nav-link, .fleet-logout-link, .fleet-sidebar-brand');
+        function setMenu(open) {
+            document.body.classList.toggle('fleet-menu-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+        }
+        toggle.addEventListener('click', function () {
+            setMenu(!document.body.classList.contains('fleet-menu-open'));
+        });
+        backdrop.addEventListener('click', function () { setMenu(false); });
+        links.forEach(function (link) {
+            link.addEventListener('click', function () { setMenu(false); });
+        });
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') setMenu(false);
+        });
+    })();
+</script>

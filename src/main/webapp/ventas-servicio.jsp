@@ -38,7 +38,8 @@
   <link rel="stylesheet" href="assets/css/fleetpro.css">
 </head>
 <body class="bg-light">
-<main class="container-fluid px-3 px-lg-5 py-4">
+<%@ include file="/WEB-INF/jspf/fleet-navigation.jspf" %>
+<main class="container-fluid px-3 px-lg-5 py-4 fleet-page-main">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div><h1 class="h3 mb-1">Ventas de servicio</h1><p class="text-secondary mb-0">Servicios de mantenimiento de la flota y documentos asociados</p></div>
         <a class="btn btn-outline-secondary" href="UsuarioServlet">Volver al panel</a>

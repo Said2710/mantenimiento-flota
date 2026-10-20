@@ -24,7 +24,8 @@
   <link rel="stylesheet" href="assets/css/fleetpro.css">
 </head>
 <body class="bg-light">
-<main class="container py-4">
+<%@ include file="/WEB-INF/jspf/fleet-navigation.jspf" %>
+<main class="container py-4 fleet-page-main">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-1">Proveedores</h1>
