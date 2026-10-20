@@ -57,32 +57,32 @@
 
   <style>
     :root {
-      --fleet-navy: #0F172A;
-      --fleet-indigo: #312E81;
-      --fleet-blue: #2563EB;
-      --fleet-blue-hover: #1D4ED8;
-      --fleet-orange: #F97316;
-      --fleet-green: #10B981;
-      --fleet-red: #DC2626;
-      --fleet-bg: #F8FAFC;
-      --fleet-border: #E2E8F0;
+      --fleet-navy: #1E3A2F;
+      --fleet-indigo: #1E3A2F;
+      --fleet-blue: #10684B;
+      --fleet-blue-hover: #1E3A2F;
+      --fleet-orange: #D97706;
+      --fleet-green: #10684B;
+      --fleet-red: #B42318;
+      --fleet-bg: #F8FAF7;
+      --fleet-border: #E5E8E1;
     }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--fleet-bg); color: #1E293B; min-height: 100vh; overflow-x: hidden; }
 
-    .sidebar { width: 270px; min-height: 100vh; background: linear-gradient(185deg, var(--fleet-navy) 0%, var(--fleet-indigo) 100%); color: #ffffff; display: flex; flex-direction: column; position: fixed; left: 0; top: 0; bottom: 0; z-index: 1030; box-shadow: 4px 0 24px rgba(15, 23, 42, 0.15); }
+    .sidebar { width: 270px; min-height: 100vh; background: var(--fleet-navy); color: #ffffff; display: flex; flex-direction: column; position: fixed; left: 0; top: 0; bottom: 0; z-index: 1030; box-shadow: 4px 0 24px rgba(20, 40, 30, 0.12); }
     .main-wrapper { margin-left: 270px; min-height: 100vh; display: flex; flex-direction: column; }
     @media (max-width: 991.98px) {
       .sidebar { position: static; width: 100%; min-height: auto; box-shadow: none; }
       .main-wrapper { margin-left: 0; }
     }
 
-    .brand-logo-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--fleet-blue) 0%, var(--fleet-orange) 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); }
+    .brand-logo-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--fleet-blue); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(16, 104, 75, 0.22); }
 
     .nav-item-custom { display: flex; align-items: center; padding: 0.75rem 1rem; border-radius: 10px; color: #94A3B8; text-decoration: none; font-weight: 500; font-size: 0.93rem; transition: all 0.2s ease; margin-bottom: 0.35rem; }
     .nav-item-custom:hover:not(.disabled) { color: #ffffff; background: rgba(255, 255, 255, 0.08); }
-    .nav-item-custom.active { color: #ffffff; background: linear-gradient(90deg, rgba(37, 99, 235, 0.9) 0%, rgba(49, 46, 129, 0.7) 100%); font-weight: 600; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); border-left: 4px solid var(--fleet-orange); }
+    .nav-item-custom.active { color: #ffffff; background: rgba(255, 255, 255, 0.14); font-weight: 600; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); border-left: 4px solid var(--fleet-orange); }
     .nav-item-custom.disabled { color: #64748B; cursor: not-allowed; opacity: 0.7; }
-    .badge-soon { background-color: rgba(249, 115, 22, 0.18); color: #FDBA74; border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.68rem; padding: 0.2rem 0.5rem; border-radius: 6px; font-weight: 600; }
+    .badge-soon { background-color: rgba(217, 119, 6, 0.18); color: #FCD49B; border: 1px solid rgba(217, 119, 6, 0.3); font-size: 0.68rem; padding: 0.2rem 0.5rem; border-radius: 6px; font-weight: 600; }
 
     .btn-logout { background: rgba(220, 38, 38, 0.12); color: #FCA5A5; border: 1px solid rgba(220, 38, 38, 0.25); border-radius: 10px; padding: 0.7rem 1rem; font-weight: 600; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; }
     .btn-logout:hover { background: rgba(220, 38, 38, 0.22); color: #ffffff; border-color: rgba(220, 38, 38, 0.5); }
@@ -96,18 +96,18 @@
     .metric-card.card-green::after { background: var(--fleet-green); }
     .metric-card.card-orange::after { background: var(--fleet-orange); }
     .icon-badge { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; }
-    .badge-icon-blue { background: rgba(37, 99, 235, 0.1); color: var(--fleet-blue); }
-    .badge-icon-green { background: rgba(16, 185, 129, 0.1); color: var(--fleet-green); }
-    .badge-icon-orange { background: rgba(249, 115, 22, 0.1); color: var(--fleet-orange); }
+    .badge-icon-blue { background: rgba(16, 104, 75, 0.1); color: var(--fleet-blue); }
+    .badge-icon-green { background: rgba(16, 104, 75, 0.1); color: var(--fleet-green); }
+    .badge-icon-orange { background: rgba(217, 119, 6, 0.1); color: var(--fleet-orange); }
 
-    .btn-fleet-primary { background-color: var(--fleet-blue); border-color: var(--fleet-blue); color: #ffffff; font-weight: 600; border-radius: 10px; padding: 0.55rem 1.25rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); transition: all 0.2s ease; }
-    .btn-fleet-primary:hover, .btn-fleet-primary:focus { background-color: var(--fleet-blue-hover); border-color: var(--fleet-blue-hover); color: #ffffff; box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35); }
+    .btn-fleet-primary { background-color: var(--fleet-blue); border-color: var(--fleet-blue); color: #ffffff; font-weight: 600; border-radius: 10px; padding: 0.55rem 1.25rem; box-shadow: 0 4px 12px rgba(30, 58, 47, 0.18); transition: all 0.2s ease; }
+    .btn-fleet-primary:hover, .btn-fleet-primary:focus { background-color: var(--fleet-blue-hover); border-color: var(--fleet-blue-hover); color: #ffffff; box-shadow: 0 6px 16px rgba(30, 58, 47, 0.24); }
     .btn-action-sm { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 0.88rem; }
 
     .table-container { background: #ffffff; border: 1px solid var(--fleet-border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03); }
-    .table-fleet thead th { background-color: #F8FAFC; color: #64748B; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.6px; padding: 0.95rem 1.25rem; border-bottom: 1px solid var(--fleet-border); }
+    .table-fleet thead th { background-color: #F8FAF7; color: #64748B; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.6px; padding: 0.95rem 1.25rem; border-bottom: 1px solid var(--fleet-border); }
     .table-fleet tbody td { padding: 1rem 1.25rem; vertical-align: middle; color: #334155; font-size: 0.88rem; border-bottom: 1px solid #F1F5F9; }
-    .table-fleet tbody tr:hover { background-color: #F8FAFC; }
+    .table-fleet tbody tr:hover { background-color: #F8FAF7; }
 
     .pill-active, .pill-inactive, .pill-blocked, .pill-normal { font-weight: 600; padding: 0.35rem 0.7rem; border-radius: 20px; font-size: 0.76rem; display: inline-flex; align-items: center; gap: 0.35rem; }
     .pill-active { background-color: rgba(16, 185, 129, 0.1); color: #059669; }
@@ -120,15 +120,16 @@
     .modal-body { padding: 1.5rem 1.75rem; }
     .modal-footer { border-top: 1px solid var(--fleet-border); padding: 1rem 1.75rem; }
     .form-control, .form-select { border-radius: 8px; border-color: var(--fleet-border); padding: 0.65rem 0.9rem; font-size: 0.9rem; }
-    .form-control:focus, .form-select:focus { border-color: var(--fleet-blue); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+    .form-control:focus, .form-select:focus { border-color: var(--fleet-blue); box-shadow: 0 0 0 3px rgba(16, 104, 75, 0.14); }
   </style>
+  <link rel="stylesheet" href="assets/css/fleetpro.css">
 </head>
 <body>
 
   <!-- Cabecera móvil -->
   <div class="d-lg-none text-white p-3 d-flex justify-content-between align-items-center" style="background: var(--fleet-navy);">
     <div class="d-flex align-items-center gap-2">
-      <div class="brand-logo-icon" style="width: 36px; height: 36px;"><i class="bi bi-truck text-white fs-5"></i></div>
+      <div class="brand-logo-icon" style="width: 36px; height: 36px;"><img src="assets/img/fleetpro-mark.svg" alt="" class="brand-symbol"></div>
       <div>
         <div class="fw-bold fs-6">FleetPro</div>
         <div class="text-white-50 small" style="font-size: 0.7rem;">Control de Flota</div>
@@ -142,7 +143,7 @@
   <!-- Barra lateral (escritorio) -->
   <aside class="sidebar d-none d-lg-flex" id="desktopSidebar">
     <div class="p-4 d-flex align-items-center gap-3 border-bottom border-light border-opacity-10">
-      <div class="brand-logo-icon"><i class="bi bi-truck text-white fs-4"></i></div>
+      <div class="brand-logo-icon"><img src="assets/img/fleetpro-mark.svg" alt="" class="brand-symbol"></div>
       <div>
         <h5 class="fw-bold mb-0 text-white">FleetPro</h5>
         <span class="text-white-50" style="font-size: 0.75rem; font-weight: 500;">Control &amp; Mantenimiento</span>
@@ -251,7 +252,7 @@
     <!-- Barra superior -->
     <header class="topbar d-flex justify-content-between align-items-center">
       <div>
-        <h4 class="fw-bold mb-1" style="color: #0F172A;">Gestión de usuarios</h4>
+        <h4 class="fw-bold mb-1" style="color: #1F2421;">Gestión de usuarios</h4>
         <p class="text-muted small mb-0">Administra cuentas, roles y estados de acceso al sistema</p>
       </div>
       <div class="d-flex align-items-center gap-3">
@@ -280,7 +281,7 @@
           <div class="metric-card card-blue d-flex align-items-center justify-content-between">
             <div>
               <div class="text-muted small fw-semibold text-uppercase mb-1" style="font-size: 0.75rem;">Total de usuarios</div>
-              <div class="h2 fw-bold mb-0" style="color: #0F172A;"><%= totalUsuarios %></div>
+              <div class="h2 fw-bold mb-0" style="color: #1F2421;"><%= totalUsuarios %></div>
               <div class="text-muted small mt-1" style="font-size: 0.78rem;"><i class="bi bi-people me-1 text-primary"></i>Registrados en la plataforma</div>
             </div>
             <div class="icon-badge badge-icon-blue"><i class="bi bi-people-fill"></i></div>
@@ -291,7 +292,7 @@
           <div class="metric-card card-green d-flex align-items-center justify-content-between">
             <div>
               <div class="text-muted small fw-semibold text-uppercase mb-1" style="font-size: 0.75rem;">Usuarios activos</div>
-              <div class="h2 fw-bold mb-0" style="color: #0F172A;"><%= totalActivos %></div>
+              <div class="h2 fw-bold mb-0" style="color: #1F2421;"><%= totalActivos %></div>
               <div class="text-muted small mt-1" style="font-size: 0.78rem;"><i class="bi bi-check2-circle me-1 text-success"></i><%= porcentajeActivos %>% con acceso habilitado</div>
             </div>
             <div class="icon-badge badge-icon-green"><i class="bi bi-person-check-fill"></i></div>
@@ -302,7 +303,7 @@
           <div class="metric-card card-orange d-flex align-items-center justify-content-between">
             <div>
               <div class="text-muted small fw-semibold text-uppercase mb-1" style="font-size: 0.75rem;">Cuentas bloqueadas</div>
-              <div class="h2 fw-bold mb-0" style="color: #0F172A;"><%= totalBloqueados %></div>
+              <div class="h2 fw-bold mb-0" style="color: #1F2421;"><%= totalBloqueados %></div>
               <div class="text-muted small mt-1" style="font-size: 0.78rem;"><i class="bi bi-shield-exclamation me-1 text-danger"></i>Por intentos fallidos</div>
             </div>
             <div class="icon-badge badge-icon-orange"><i class="bi bi-lock-fill"></i></div>

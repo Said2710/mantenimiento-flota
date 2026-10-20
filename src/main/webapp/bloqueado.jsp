@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Cuenta bloqueada</title>
     <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/fleetpro.css">
 </head>
 <body class="bg-slate-50 min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-[480px] bg-white rounded-xl shadow-xl p-8 border border-slate-100 text-center">
